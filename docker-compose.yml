@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    volumes:
+     - ./docker/bd/:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: ${POSTGRES_USER}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+     - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      - CONNECTION_STRING=${CONNECTION_STRING}
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - postgres
+    environment:
+      - CONNECTION_STRING=${CONNECTION_STRING}
+      - BOT_TOKEN=${BOT_TOKEN}

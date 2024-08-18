@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Prosto+One&family=Russo+One&family=Spectral+SC:ital,wght@0,600;0,800;1,300;1,800&display=swap");
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
